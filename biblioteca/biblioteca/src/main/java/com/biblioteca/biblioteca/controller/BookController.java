@@ -36,6 +36,11 @@ public class BookController {
         bookService.replaceBook(id, book); 
     }
 
+     @PatchMapping("/{id}")
+    public void patchBook(@PathVariable String id, @RequestBody Book book) {
+        bookService.patchBook(id, book); 
+    }
+
     @DeleteMapping("/{id}")
     public void deleteBook(@PathVariable String id) {
         bookService.deleteBook(id);
