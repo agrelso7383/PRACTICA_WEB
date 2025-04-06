@@ -1,6 +1,6 @@
 package com.biblioteca.biblioteca.model;
 
-
+// This class represents a user of the library system
 public class User {
     private String id;
     private String name;
@@ -15,7 +15,7 @@ public class User {
         this.email = email;
     }
 
-    // Getters and Setters
+    // Getters and Setters (user ID)
     public String getId() {
         return id;
     }
@@ -23,7 +23,7 @@ public class User {
     public void setId(String id) {
         this.id = id;
     }
-
+// user's name
     public String getName() {
         return name;
     }
@@ -31,7 +31,7 @@ public class User {
     public void setName(String name) {
         this.name = name;
     }
-
+// user's email
     public String getEmail() {
         return email;
     }
