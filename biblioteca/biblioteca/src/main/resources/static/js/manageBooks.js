@@ -1,11 +1,14 @@
+// When the page loads, fetch the list of books from the server
 window.onload = fetchBooks;
 
+// Fetch all books from the backend API
 async function fetchBooks() {
   const response = await fetch("/api/books");
   const booksData = await response.json();
   renderBooks(booksData);
 }
 
+// Display the list of books on the page
 function renderBooks(books) {
   const container = document.getElementById("booksContainer");
   container.innerHTML = "";
@@ -16,6 +19,7 @@ function renderBooks(books) {
     return;
   }
 
+   // For each book, create a card with title, author, and buttons
   keys.forEach(id => {
     const book = books[id];
     const bookDiv = document.createElement("div");
@@ -31,6 +35,7 @@ function renderBooks(books) {
   });
 }
 
+// Add a new book using POST
 async function addBook(event) {
   event.preventDefault();
   const title = document.getElementById("bookTitle").value.trim();
@@ -48,6 +53,7 @@ async function addBook(event) {
   }
 }
 
+// Load selected book data into the form to allow editing
 function loadBookForEdit(id, title, author) {
   document.getElementById("bookTitle").value = title;
   document.getElementById("bookAuthor").value = author;
@@ -57,6 +63,7 @@ function loadBookForEdit(id, title, author) {
   document.getElementById("updateButtonPatch").classList.remove("d-none");
 }
 
+// Update the book fully (PUT)
 async function updateBookPUT() {
   const id = document.getElementById("editingBookId").value;
   const title = document.getElementById("bookTitle").value.trim();
@@ -74,6 +81,7 @@ async function updateBookPUT() {
   }
 }
 
+// Update only some fields of the book (PATCH)
 async function updateBookPATCH() {
   const id = document.getElementById("editingBookId").value;
   const title = document.getElementById("bookTitle").value.trim();
@@ -95,11 +103,13 @@ async function updateBookPATCH() {
   }
 }
 
+// Delete a book by its ID
 async function deleteBook(id) {
   await fetch(`/api/books/${id}`, { method: "DELETE" });
   fetchBooks();
 }
 
+// Clear the form and reset buttons
 function resetForm() {
   document.getElementById("addBookForm").reset();
   document.getElementById("editingBookId").value = "";
