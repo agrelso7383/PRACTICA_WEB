@@ -1,3 +1,6 @@
+/* Like other pages, uses flex layout and consistent colors/fonts.
+   Adds a hero section with background image and interactive card elements. */
+
 html, body {
     height: 100%;
     margin: 0;
@@ -11,7 +14,8 @@ html, body {
     color: #f8f9fa;
     padding-top: 80px;
   }
-  
+
+/* HERO SECTION (main visual banner) */
   .hero {
     background-image: url('/images/cabecera.jpg');
     background-size: cover;
@@ -37,7 +41,8 @@ html, body {
   .hero .btn {
     margin-top: 20px;
   }
-  
+
+/* NAVBAR */
   .navbar {
     background-color: #c2ca4d;
   }
@@ -57,12 +62,14 @@ html, body {
     font-weight: 500;
     font-size: 1.1rem;
   }
-  
+
+/* GENERAL BUTTON STYLE */
   .btn-custom:hover {
     background-color: #b2b93d;
     color: black;
   }
-  
+
+/* CARD STYLING */
   .card {
     border-radius: 10px;
     border: 1px solid #ddd;
@@ -80,7 +87,8 @@ html, body {
     font-size: 1.3rem;
     font-weight: 600;
   }
-  
+
+/* SPECIAL DANGER BUTTON (red) */
   .btn-danger {
     background-color: #e74c3c;
     border-color: #e74c3c;
@@ -97,7 +105,8 @@ html, body {
     flex: 1;
     margin-top: 30px;
   }
-  
+
+/* FOOTER */
   footer {
     background-color: #343a40;
     color: white;
@@ -105,7 +114,9 @@ html, body {
     font-size: 0.9rem;
     text-align: center;
   }
-  
+
+
+/* RESPONSIVE DESIGN */
   @media (max-width: 768px) {
     .hero h1 {
       font-size: 2.5rem;
