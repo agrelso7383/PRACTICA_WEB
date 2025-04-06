@@ -1,3 +1,6 @@
+/* Similar layout to other pages: navbar, footer, Oswald font, dark background.
+   This file focuses on displaying a list of books in styled boxes with delete buttons. */
+
 html, body {
   height: 100%;
   margin: 0;
@@ -21,14 +24,16 @@ html, body {
   .container {
     flex: 1;
   }
-  
+
+/* PAGE TITLE */
   h1 {
     font-size: 2.5rem;
     font-weight: bold;
     margin-bottom: 30px;
     text-align: center;
   }
-  
+
+/* INDIVIDUAL BOOK BOX STYLE */
   .book-item {
     background-color: #ffffff;
     color: #212529;
@@ -38,17 +43,20 @@ html, body {
     border-radius: 8px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   }
-  
+
+/* Book title */
   .book-item h4 {
     font-size: 1.5rem;
     margin-bottom: 10px;
   }
-  
+
+/* Book description or details */
   .book-item p {
     font-size: 1.1rem;
     color: #495057;
   }
-  
+
+/* DELETE BUTTON STYLE */
   .book-item button {
     background-color: #dc3545;
     color: white;
@@ -59,7 +67,8 @@ html, body {
     transition: background-color 0.3s ease;
     font-family: 'Oswald', sans-serif;
   }
-  
+
+/* Hover effect for delete button */
   .book-item button:hover {
     background-color: #c82333;
   }
