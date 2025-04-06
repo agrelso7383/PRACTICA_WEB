@@ -1,3 +1,5 @@
+/* Reuses the same layout and style patterns as manageBooks.css and manageLoans.css.
+   This file is specifically for managing users — cards, buttons, and user list layout. */
 html, body {
     height: 100%;
   margin: 0;
