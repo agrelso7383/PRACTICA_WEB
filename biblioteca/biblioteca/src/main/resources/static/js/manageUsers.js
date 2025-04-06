@@ -1,11 +1,14 @@
+// Load users when the page loads
 window.onload = fetchUsers;
 
+// Fetch all users from the backend
 async function fetchUsers() {
   const response = await fetch("/api/users");
   const usersData = await response.json();
   renderUsers(usersData);
 }
 
+// Render each user on the page
 function renderUsers(users) {
   const container = document.getElementById("usersContainer");
   container.innerHTML = "";
@@ -16,6 +19,7 @@ function renderUsers(users) {
     return;
   }
 
+   // Create a styled card for each user
   keys.forEach(id => {
     const user = users[id];
     const userDiv = document.createElement("div");
@@ -31,6 +35,7 @@ function renderUsers(users) {
   });
 }
 
+// Add a new user
 async function addUser(event) {
   event.preventDefault();
   const name = document.getElementById("userName").value.trim();
@@ -48,6 +53,7 @@ async function addUser(event) {
   }
 }
 
+// Load selected user data into form to allow editing
 function loadUserForEdit(id, name, email) {
   document.getElementById("userName").value = name;
   document.getElementById("userEmail").value = email;
@@ -57,6 +63,7 @@ function loadUserForEdit(id, name, email) {
   document.getElementById("updateButtonPatch").classList.remove("d-none");
 }
 
+// Update user info using PATCH
 async function updateUserPATCH() {
   const id = document.getElementById("editingUserId").value;
   const name = document.getElementById("userName").value.trim();
@@ -78,6 +85,7 @@ async function updateUserPATCH() {
   }
 }
 
+// Delete user by ID
 async function deleteUser(id) {
   await fetch(`/api/users/${id}`, { method: "DELETE" });
   fetchUsers();
