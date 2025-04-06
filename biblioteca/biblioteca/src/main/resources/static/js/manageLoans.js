@@ -1,11 +1,14 @@
+// When the page loads, fetch and display all loan records
 window.onload = fetchLoans;
 
+// Fetch all loans from the backend
 async function fetchLoans() {
   const response = await fetch("/api/loans");
   const loansData = await response.json();
   renderLoans(loansData);
 }
 
+// Display each loan on the page
 function renderLoans(loans) {
   const container = document.getElementById("loansContainer");
   container.innerHTML = "";
@@ -16,6 +19,7 @@ function renderLoans(loans) {
     return;
   }
 
+  // For each loan, create a styled row with buttons
   keys.forEach(id => {
     const loan = loans[id];
     const loanDiv = document.createElement("div");
@@ -31,6 +35,7 @@ function renderLoans(loans) {
   });
 }
 
+// Add a new loan using the form
 async function addLoan(event) {
   event.preventDefault();
 
@@ -51,6 +56,7 @@ async function addLoan(event) {
   }
 }
 
+// Fill the form fields to edit a loan
 function loadLoanForEdit(id, book, user, loanDate, returnDate) {
   document.getElementById("loanBook").value = book;
   document.getElementById("loanUser").value = user;
@@ -58,10 +64,12 @@ function loadLoanForEdit(id, book, user, loanDate, returnDate) {
   document.getElementById("returnDate").value = returnDate;
   document.getElementById("editingLoanId").value = id;
 
+// Switch buttons visibility
   document.getElementById("submitButton").classList.add("d-none");
   document.getElementById("updateButtonPatch").classList.remove("d-none");
 }
 
+// Update loan fields using PATCH
 async function updateLoanPATCH() {
   const id = document.getElementById("editingLoanId").value;
   const book = document.getElementById("loanBook").value.trim();
@@ -87,11 +95,13 @@ async function updateLoanPATCH() {
   }
 }
 
+// Delete a loan by ID
 async function deleteLoan(id) {
   await fetch(`/api/loans/${id}`, { method: "DELETE" });
   fetchLoans();
 }
 
+// Reset form and button states
 function resetForm() {
   document.getElementById("addLoanForm").reset();
   document.getElementById("editingLoanId").value = "";
@@ -99,5 +109,6 @@ function resetForm() {
   document.getElementById("updateButtonPatch").classList.add("d-none");
 }
 
+// Form and button event listeners
 document.getElementById("addLoanForm").addEventListener("submit", addLoan);
 document.getElementById("updateButtonPatch").addEventListener("click", updateLoanPATCH);
