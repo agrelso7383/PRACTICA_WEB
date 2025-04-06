@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Virtual Library - Manage Loans</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+
+  <link rel="stylesheet" href="css/manageLoans.css" />
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">Virtual Library</a>
+    </div>
+  </nav>
+
+  <div class="container mt-5 pt-4">
+    <h1>Manage Loans</h1>
+
+    <div class="card mb-4">
+      <div class="card-header">
+        <h3 class="m-0">Add or Update Loan</h3>
+      </div>
+      <div class="card-body">
+        <form id="addLoanForm">
+          <div class="mb-3">
+            <label for="loanBook" class="form-label">Book Title</label>
+            <input type="text" class="form-control" id="loanBook" required />
+          </div>
+          <div class="mb-3">
+            <label for="loanUser" class="form-label">User Name</label>
+            <input type="text" class="form-control" id="loanUser" required />
+          </div>
+          <div class="mb-3">
+            <label for="loanDate" class="form-label">Loan Date</label>
+            <input type="text" class="form-control" id="loanDate" required />
+          </div>
+          <div class="mb-3">
+            <label for="returnDate" class="form-label">Return Date</label>
+            <input type="text" class="form-control" id="returnDate" required />
+          </div>
+
+          <input type="hidden" id="editingLoanId" />
+
+          <button type="submit" class="btn btn-primary w-100" id="submitButton">Add Loan</button>
+          <button type="button" class="btn btn-info w-100 mt-2 d-none" id="updateButtonPatch">Update (PATCH)</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="loan-list">
+      <h3>Loan Records</h3>
+      <div id="loansContainer"></div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Virtual Library - All rights reserved.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/manageLoans.js"></script>
+</body>
+</html>
