@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
+// Request related to loans, as in BookController, create one or more loans, returns one or more specidifc,
+// Replaces a loan with data certain fields ore completely and deletes one or all
 @RestController
 @RequestMapping("/api/loans")
 public class LoanController {
