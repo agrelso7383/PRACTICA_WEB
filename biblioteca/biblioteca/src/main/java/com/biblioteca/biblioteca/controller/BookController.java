@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
+// Handles all the requests related to books
 @RestController
 @RequestMapping("/api/books")
 public class BookController {
