@@ -43,6 +43,10 @@ public class LoanController {
         loanService.updateLoan(id, loan);
     }
 
+     @PatchMapping("/{id}")
+    public void patchLoan(@PathVariable String id, @RequestBody Loan loan) {
+        loanService.patchLoan(id, loan);
+    }
 
     @DeleteMapping("/{id}")
     public void deleteLoan(@PathVariable String id) {
