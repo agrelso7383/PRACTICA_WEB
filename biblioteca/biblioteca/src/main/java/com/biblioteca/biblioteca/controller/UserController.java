@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
+// This controller handles all requests related to users.
+// Like with books and loans, it allows creating one or more users,
+// retrieving one or all users, updating users (fully or partially),
+// and deleting one or all users
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
