@@ -36,6 +36,11 @@ public class UserController {
         userService.replaceUser(id, user);
     }
 
+     @PatchMapping("/{id}")
+    public void patchUser(@PathVariable String id, @RequestBody User user) {
+        userService.patchUser(id, user);
+    }
+
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable String id) {
         userService.deleteUser(id);
