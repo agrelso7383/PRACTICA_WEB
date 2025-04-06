@@ -1,3 +1,5 @@
+/* Uses the same base layout and styles as other pages.
+   This stylesheet is focused on managing books — includes card layouts and action buttons. */
 html, body {
   height: 100%;
   margin: 0;
@@ -22,7 +24,8 @@ html, body {
     flex: 1; 
     margin-bottom: 60px;
   }
-  
+
+/* PAGE TITLE */
   h1 {
     font-size: 2.5rem;
     font-weight: bold;
@@ -44,7 +47,8 @@ html, body {
     background-color: #c2ca4d;
     font-weight: bold;
   }
-  
+
+/* PRIMARY AND INFO BUTTON STYLING */
   .btn-primary, .btn-info {
     background-color: #c2ca4d;
     border: none;
@@ -56,16 +60,21 @@ html, body {
   .btn-primary:hover, .btn-info:hover {
     background-color: #b2b93d;
   }
-  
+
+
+/* DELETE BUTTON (just custom font here) */
   .btn-danger {
     font-family: 'Oswald', sans-serif;
   }
-  
+
+/* BOOK LIST SECTION HEADINGS */
   .book-list h3 {
     margin-top: 40px;
     margin-bottom: 20px;
   }
-  
+
+
+/* INDIVIDUAL BOOK ITEM STYLE */
   .book-item {
     font-family: Arial, sans-serif;
   }
