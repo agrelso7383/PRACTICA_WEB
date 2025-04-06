@@ -1,3 +1,5 @@
+/* Follows the same style structure as other pages: flex layout, clean fonts, and consistent navbar/footer.
+   Adds info cards with icons and hover effects to present features or services. */
 html, body {
     height: 100%;
     margin: 0;
@@ -46,7 +48,8 @@ html, body {
     margin-top: 30px;
     margin-bottom: 40px;
   }
-  
+
+/* INFO SECTION - row of cards */
   .info-section {
     display: flex;
     justify-content: center;
@@ -54,7 +57,8 @@ html, body {
     flex-wrap: wrap;
     margin-top: 30px;
   }
-  
+
+/* INDIVIDUAL INFO CARD */
   .info-card {
     background-color: #ffffff;
     color: #495057;
@@ -67,12 +71,15 @@ html, body {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     font-family: Arial, sans-serif;
   }
-  
+
+/* Hover animation for cards */
   .info-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
   }
-  
+
+
+/* Card image styling */
   .info-card img {
     width: 120px;
     height: 120px;
@@ -92,7 +99,8 @@ html, body {
     margin-bottom: 20px;
     color: #495057;
   }
-  
+
+/* PRIMARY BUTTON STYLING */
   .btn-primary {
     background-color: #c2ca4d;
     border-color: #c2ca4d;
@@ -113,7 +121,8 @@ html, body {
     font-size: 0.9rem;
     width: 100%;
   }
-  
+
+/* RESPONSIVE: stack cards vertically on smaller screens */
   @media (max-width: 768px) {
     .info-section {
       flex-direction: column;
