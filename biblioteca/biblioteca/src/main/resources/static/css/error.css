@@ -1,3 +1,5 @@
+/* Similar to aboutUs.css: uses flex layout, center-aligned text, and same colors/fonts */
+html, body {
 html, body {
     height: 100%;
     margin: 0;
@@ -5,14 +7,17 @@ html, body {
     flex-direction: column;
     font-family: 'Oswald', sans-serif;
   }
-  
+
+ /* Set background color and top padding to avoid overlapping with navbar */   
   body {
     background-color: #326070;
     color: #f8f9fa;
     padding-top: 80px;
     text-align: center;
   }
-  
+
+    
+/* Navbar style (same as other pages) */
   .navbar {
     background-color: #c2ca4d;
   }
@@ -21,7 +26,9 @@ html, body {
     font-weight: 600;
     color: #fffdfd;
   }
-  
+
+    
+/* Main error message container: centered vertically */
   .error-content {
     flex: 1;
     display: flex;
@@ -30,18 +37,22 @@ html, body {
     padding: 60px 20px;
     font-family: Arial, sans-serif;
   }
-  
+
+    
+/* Big red error title */
   h1 {
     font-size: 4rem;
     color: #ff6b6b;
     font-family: 'Oswald', sans-serif;
   }
-  
+
+    /* Description text */
   p {
     font-size: 1.2rem;
     color: #e0e0e0;
   }
-  
+
+    /* Button style (same as other pages) */
   .btn-custom {
     background-color: #c2ca4d;
     color: black;
@@ -53,7 +64,8 @@ html, body {
   .btn-custom:hover {
     background-color: #b2b93d;
   }
-  
+
+    /* Footer style (same across pages) */
   footer {
     background-color: #343a40;
     color: white;
