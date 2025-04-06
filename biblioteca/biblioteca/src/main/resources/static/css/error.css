@@ -1,0 +1,64 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Oswald', sans-serif;
+  }
+  
+  body {
+    background-color: #326070;
+    color: #f8f9fa;
+    padding-top: 80px;
+    text-align: center;
+  }
+  
+  .navbar {
+    background-color: #c2ca4d;
+  }
+  
+  .navbar-brand {
+    font-weight: 600;
+    color: #fffdfd;
+  }
+  
+  .error-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  h1 {
+    font-size: 4rem;
+    color: #ff6b6b;
+    font-family: 'Oswald', sans-serif;
+  }
+  
+  p {
+    font-size: 1.2rem;
+    color: #e0e0e0;
+  }
+  
+  .btn-custom {
+    background-color: #c2ca4d;
+    color: black;
+    border: none;
+    font-weight: 500;
+    font-size: 1.1rem;
+  }
+  
+  .btn-custom:hover {
+    background-color: #b2b93d;
+  }
+  
+  footer {
+    background-color: #343a40;
+    color: white;
+    padding: 10px 0;
+    font-size: 0.9rem;
+    text-align: center;
+  }
+  
