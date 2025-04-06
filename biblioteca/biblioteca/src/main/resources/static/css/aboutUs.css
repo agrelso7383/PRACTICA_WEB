@@ -1,3 +1,4 @@
+/* Set base height and font for html and body, using flex layout */
 html, body {
     height: 100%;
     margin: 0;
@@ -5,47 +6,55 @@ html, body {
     flex-direction: column;
     font-family: 'Oswald', sans-serif;
   }
-  
+
+/* Body background and text styling */
   body {
     background-color: #326070;
     color: #f8f9fa;
     padding-top: 80px;
   }
-  
+
+/* Navigation bar background color */
   .navbar {
     background-color: #c2ca4d;
   }
-  
+
+/* Brand text style in navbar */
   .navbar-brand {
     font-weight: 600;
     color: #fffdfd;
   }
-  
+
+/* Main content container settings */
   .container {
     flex: 1;
     margin-top: 30px;
     padding-bottom: 40px;
   }
-  
+
+/* Header text style */
   h1 {
     font-size: 3rem;
     font-weight: bold;
     margin-bottom: 40px;
     text-align: center;
   }
-  
+
+/* Wrapper for the about us text */
   .content-wrapper {
     max-width: 800px;
     margin: auto;
     text-align: left;
     font-family: Arial, sans-serif;
   }
-  
+
+/* Paragraph spacing and line height */
   .content-wrapper p {
     line-height: 1.6;
     margin-bottom: 16px;
   }
-  
+
+/* Custom button style */
   .btn-custom {
     background-color: #c2ca4d;
     color: black;
@@ -53,11 +62,14 @@ html, body {
     font-weight: 500;
     font-size: 1.1rem;
   }
-  
+
+
+/* Button hover effect */
   .btn-custom:hover {
     background-color: #b2b93d;
   }
-  
+
+/* Footer style */
   footer {
     background-color: #343a40;
     color: white;
@@ -65,7 +77,9 @@ html, body {
     font-size: 0.9rem;
     text-align: center;
   }
-  
+
+
+/* Responsive design for smaller screens */
   @media (max-width: 768px) {
     h1 {
       font-size: 2.5rem;
