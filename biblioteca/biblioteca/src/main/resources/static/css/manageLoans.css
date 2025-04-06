@@ -1,3 +1,6 @@
+/* This file is nearly identical to manageBooks.css but adapted for loans.
+   It styles the layout, cards, and buttons for managing loan records. */
+
 html, body {
     height: 100%;
   margin: 0;
