@@ -1,41 +1,34 @@
-// When the page loads, fetch the list of books from the server
 window.onload = fetchBooks;
 
-// Fetch all books from the backend API
 async function fetchBooks() {
   const response = await fetch("/api/books");
-  const booksData = await response.json();
-  renderBooks(booksData);
+  const books = await response.json();
+  renderBooks(books);
 }
 
-// Display the list of books on the page
 function renderBooks(books) {
   const container = document.getElementById("booksContainer");
   container.innerHTML = "";
 
-  const keys = Object.keys(books);
-  if (keys.length === 0) {
-    container.innerHTML = "<p>No books available.</p>";
-    return;
-  }
+  books.forEach(book => {
+    const div = document.createElement("div");
+    div.className = "col-md-4";
 
-   // For each book, create a card with title, author, and buttons
-  keys.forEach(id => {
-    const book = books[id];
-    const bookDiv = document.createElement("div");
-    bookDiv.classList.add("book-item", "d-flex", "justify-content-between", "align-items-center", "p-3", "bg-white", "rounded", "shadow-sm", "mb-3");
-    bookDiv.innerHTML = `
-      <span><strong>${book.title}</strong> by ${book.author}</span>
-      <div>
-        <button class="btn btn-sm btn-secondary me-2" onclick="loadBookForEdit('${id}', '${book.title}', '${book.author}')">Update</button>
-        <button class="btn btn-sm btn-danger" onclick="deleteBook('${id}')">Delete</button>
+    div.innerHTML = `
+      <div class="card book-item">
+        <div class="card-body">
+          <h5 class="card-title">${book.title}</h5>
+          <p class="card-text">Author: ${book.author}</p>
+          <button class="btn btn-info btn-sm me-2" onclick="loadBookForEdit(${book.id}, '${book.title}', '${book.author}')">Update</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteBook(${book.id})">Delete</button>
+        </div>
       </div>
     `;
-    container.appendChild(bookDiv);
+
+    container.appendChild(div);
   });
 }
 
-// Add a new book using POST
 async function addBook(event) {
   event.preventDefault();
   const title = document.getElementById("bookTitle").value.trim();
@@ -53,27 +46,24 @@ async function addBook(event) {
   }
 }
 
-// Load selected book data into the form to allow editing
 function loadBookForEdit(id, title, author) {
   document.getElementById("bookTitle").value = title;
   document.getElementById("bookAuthor").value = author;
-  document.getElementById("editingBookId").value = id;
-
-  document.getElementById("submitButton").classList.add("d-none");
-  document.getElementById("updateButtonPatch").classList.remove("d-none");
+  document.getElementById("editBookId").value = id;
+  document.getElementById("submitBtn").style.display = "none";
+  document.getElementById("updateBtn").style.display = "inline-block";
 }
 
-// Update the book fully (PUT)
-async function updateBookPUT() {
-  const id = document.getElementById("editingBookId").value;
+async function updateBook() {
+  const id = document.getElementById("editBookId").value;
   const title = document.getElementById("bookTitle").value.trim();
   const author = document.getElementById("bookAuthor").value.trim();
 
   if (id && title && author) {
-    await fetch(`/api/books/${id}`, {
+    await fetch("/api/books/" + id, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id, title, author })
+      body: JSON.stringify({ title, author })
     });
 
     resetForm();
@@ -81,42 +71,16 @@ async function updateBookPUT() {
   }
 }
 
-// Update only some fields of the book (PATCH)
-async function updateBookPATCH() {
-  const id = document.getElementById("editingBookId").value;
-  const title = document.getElementById("bookTitle").value.trim();
-  const author = document.getElementById("bookAuthor").value.trim();
-
-  const body = {};
-  if (title) body.title = title;
-  if (author) body.author = author;
-
-  if (id) {
-    await fetch(`/api/books/${id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body)
-    });
-
-    resetForm();
-    fetchBooks();
-  }
-}
-
-// Delete a book by its ID
 async function deleteBook(id) {
-  await fetch(`/api/books/${id}`, { method: "DELETE" });
+  await fetch("/api/books/" + id, { method: "DELETE" });
   fetchBooks();
 }
 
-// Clear the form and reset buttons
 function resetForm() {
-  document.getElementById("addBookForm").reset();
-  document.getElementById("editingBookId").value = "";
-  document.getElementById("submitButton").classList.remove("d-none");
-  document.getElementById("updateButtonPatch").classList.add("d-none");
+  document.getElementById("bookTitle").value = "";
+  document.getElementById("bookAuthor").value = "";
+  document.getElementById("editBookId").value = "";
+  document.getElementById("submitBtn").style.display = "inline-block";
+  document.getElementById("updateBtn").style.display = "none";
 }
 
-document.getElementById("addBookForm").addEventListener("submit", addBook);
-document.getElementById("updateButtonPut")?.addEventListener("click", updateBookPUT);
-document.getElementById("updateButtonPatch").addEventListener("click", updateBookPATCH);
