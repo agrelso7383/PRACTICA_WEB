@@ -1,0 +1,44 @@
+2025-04-23 12:41:44.512122+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "LOAN" not found (this database is empty); SQL statement:
+select l1_0.id,l1_0.book_id,l1_0.loan_date,l1_0.return_date,l1_0.user_id from loan l1_0 [42104-232]
+2025-04-23 12:42:03.981909+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "BOOK" not found (this database is empty); SQL statement:
+select b1_0.id,b1_0.author,b1_0.title from book b1_0 [42104-232]
+2025-04-23 12:42:09.898730+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "BOOK" not found (this database is empty); SQL statement:
+insert into book (author,title,id) values (?,?,default) [42104-232]
+2025-04-23 12:42:15.962890+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "BOOK" not found (this database is empty); SQL statement:
+select b1_0.id,b1_0.author,b1_0.title from book b1_0 [42104-232]
+2025-04-27 13:00:33.097450+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "DELETE [*]* FROM BOOK"; se esperaba "identifier"
+Syntax error in SQL statement "DELETE [*]* FROM BOOK"; expected "identifier"; SQL statement:
+DELETE * FROM BOOK [42001-232]
+2025-04-27 13:00:33.115452+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "DELETE [*]* FROM USERS"; se esperaba "identifier"
+Syntax error in SQL statement "DELETE [*]* FROM USERS"; expected "identifier"; SQL statement:
+DELETE * FROM USERS [42001-232]
+2025-04-27 13:00:33.116453+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "DELETE [*]* FROM LOAN"; se esperaba "identifier"
+Syntax error in SQL statement "DELETE [*]* FROM LOAN"; expected "identifier"; SQL statement:
+DELETE * FROM LOAN [42001-232]
+2025-04-27 13:00:51.975782+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "DELETE [*]*  BOOK"; se esperaba "identifier"
+Syntax error in SQL statement "DELETE [*]*  BOOK"; expected "identifier"; SQL statement:
+DELETE *  BOOK [42001-232]
+2025-04-27 13:00:51.975782+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "DELETE [*]*  USERS"; se esperaba "identifier"
+Syntax error in SQL statement "DELETE [*]*  USERS"; expected "identifier"; SQL statement:
+DELETE *  USERS [42001-232]
+2025-04-27 13:00:51.976783+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "DELETE [*]*  LOAN"; se esperaba "identifier"
+Syntax error in SQL statement "DELETE [*]*  LOAN"; expected "identifier"; SQL statement:
+DELETE *  LOAN [42001-232]
+2025-04-27 13:02:20.589781+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "ALTER TABLE usersALTER [*]COLUMN id RESTART WITH 1"; se esperaba "., ADD, SET, RENAME, DROP, ALTER"
+Syntax error in SQL statement "ALTER TABLE usersALTER [*]COLUMN id RESTART WITH 1"; expected "., ADD, SET, RENAME, DROP, ALTER"; SQL statement:
+ALTER TABLE usersALTER COLUMN id RESTART WITH 1 [42001-232]
+2025-04-27 13:02:20.589781+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "ALTER TABLE [*]user ALTER COLUMN id RESTART WITH 1"; se esperaba "identifier"
+Syntax error in SQL statement "ALTER TABLE [*]user ALTER COLUMN id RESTART WITH 1"; expected "identifier"; SQL statement:
+ALTER TABLE user ALTER COLUMN id RESTART WITH 1 [42001-232]
