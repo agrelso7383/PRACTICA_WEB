@@ -1,49 +1,52 @@
 package com.biblioteca.biblioteca.model;
 
-// This class represents a loan of a book to a user
+import jakarta.persistence.*;
+
+@Entity
 public class Loan {
-    private String id;
-    private String user;
-    private String book;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id") 
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "book_id")
+    private Book book;
+
     private String loanDate;
     private String returnDate;
 
-    // Constructor
-    public Loan(){}
+    public Loan() {}
 
-    public Loan(String id, String book, String user, String loanDate, String returnDate) {
-        this.id = id;
-        this.book = book;
-        this.user = user;
-        this.loanDate = loanDate;
-        this.returnDate = returnDate;
-    }
 
-    // Getters and Setters (loan ID)
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
-// user ID or name of the person who did the loan
-    public String getUser() {
+
+    public User getUser() {
         return user;
     }
 
-    public void setUser(String user) {
+    public void setUser(User user) {
         this.user = user;
     }
-// returns the book ID or title of the loan
-    public String getBook() {
+
+    public Book getBook() {
         return book;
     }
 
-    public void setBook(String book) {
+    public void setBook(Book book) {
         this.book = book;
     }
-// when the loan was made
+
     public String getLoanDate() {
         return loanDate;
     }
@@ -51,7 +54,7 @@ public class Loan {
     public void setLoanDate(String loanDate) {
         this.loanDate = loanDate;
     }
-// expected return date
+
     public String getReturnDate() {
         return returnDate;
     }
@@ -59,6 +62,5 @@ public class Loan {
     public void setReturnDate(String returnDate) {
         this.returnDate = returnDate;
     }
-
 }
 
