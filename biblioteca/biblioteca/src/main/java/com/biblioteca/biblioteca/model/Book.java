@@ -1,30 +1,41 @@
 package com.biblioteca.biblioteca.model;
 
-// This class represents a book with its basic information
+import jakarta.persistence.*;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity
 public class Book {
-    private String id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String title;
     private String author;
 
-    // Constructor
+    @OneToMany(mappedBy = "book")
+    @JsonIgnore
+    private List<Loan> loans;
+
+    
+
     public Book() {}
 
-    // Constructor with parameters to create a book
-    public Book(String id, String title, String author) {
-        this.id = id;
+    public Book(String title, String author) {
         this.title = title;
         this.author = author;
     }
 
-    // Getters and Setters (book ID)
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
-// book title
+
     public String getTitle() {
         return title;
     }
@@ -32,12 +43,20 @@ public class Book {
     public void setTitle(String title) {
         this.title = title;
     }
-//book author
+
     public String getAuthor() {
         return author;
     }
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public List<Loan> getLoans() {
+        return loans;
+    }
+
+    public void setLoans(List<Loan> loans) {
+        this.loans = loans;
     }
 }
