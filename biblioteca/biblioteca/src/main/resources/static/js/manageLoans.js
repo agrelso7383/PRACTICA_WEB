@@ -1,114 +1,99 @@
-// When the page loads, fetch and display all loan records
 window.onload = fetchLoans;
 
-// Fetch all loans from the backend
 async function fetchLoans() {
   const response = await fetch("/api/loans");
-  const loansData = await response.json();
-  renderLoans(loansData);
+  const loans = await response.json();
+  renderLoans(loans);
 }
 
-// Display each loan on the page
 function renderLoans(loans) {
   const container = document.getElementById("loansContainer");
   container.innerHTML = "";
 
-  const keys = Object.keys(loans);
-  if (keys.length === 0) {
-    container.innerHTML = "<p>No loans available.</p>";
-    return;
-  }
+  loans.forEach(loan => {
+    const div = document.createElement("div");
+    div.className = "col-md-4";
 
-  // For each loan, create a styled row with buttons
-  keys.forEach(id => {
-    const loan = loans[id];
-    const loanDiv = document.createElement("div");
-    loanDiv.classList.add("loan-item", "d-flex", "justify-content-between", "align-items-center", "p-3", "bg-white", "rounded", "shadow-sm", "mb-3");
-    loanDiv.innerHTML = `
-      <span><strong>${loan.book}</strong> loaned to ${loan.user} — Loan: ${loan.loanDate} | Return: ${loan.returnDate}</span>
-      <div>
-        <button class="btn btn-sm btn-secondary me-2" onclick="loadLoanForEdit('${id}', '${loan.book}', '${loan.user}', '${loan.loanDate}', '${loan.returnDate}')">Update</button>
-        <button class="btn btn-sm btn-danger" onclick="deleteLoan('${id}')">Delete</button>
+    div.innerHTML = `
+      <div class="card book-item">
+        <div class="card-body">
+          <h5 class="card-title">Loan ID: ${loan.id}</h5>
+          <p class="card-text">
+            User ID: ${loan.user?.id || 'N/A'}<br>
+            Book ID: ${loan.book?.id || 'N/A'}<br>
+            Loan Date: ${loan.loanDate}<br>
+            Return Date: ${loan.returnDate || '—'}
+          </p>
+          <button class="btn btn-info btn-sm me-2" onclick="loadLoanForEdit(${loan.id}, ${loan.user?.id}, ${loan.book?.id}, '${loan.loanDate}', '${loan.returnDate || ''}')">Update</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteLoan(${loan.id})">Delete</button>
+        </div>
       </div>
     `;
-    container.appendChild(loanDiv);
+
+    container.appendChild(div);
   });
 }
 
-// Add a new loan using the form
 async function addLoan(event) {
   event.preventDefault();
+  const user = { id: parseInt(document.getElementById("userId").value) };
+  const book = { id: parseInt(document.getElementById("bookId").value) };
+  const loanDate = document.getElementById("loanDate").value;
+  const returnDate = document.getElementById("returnDate").value;
 
-  const book = document.getElementById("loanBook").value.trim();
-  const user = document.getElementById("loanUser").value.trim();
-  const loanDate = document.getElementById("loanDate").value.trim();
-  const returnDate = document.getElementById("returnDate").value.trim();
+  const loan = { user, book, loanDate, returnDate };
 
-  if (book && user && loanDate && returnDate) {
-    await fetch("/api/loans", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ book, user, loanDate, returnDate })
-    });
+  await fetch("/api/loans", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(loan)
+  });
 
-    resetForm();
-    fetchLoans();
-  }
-}
-
-// Fill the form fields to edit a loan
-function loadLoanForEdit(id, book, user, loanDate, returnDate) {
-  document.getElementById("loanBook").value = book;
-  document.getElementById("loanUser").value = user;
-  document.getElementById("loanDate").value = loanDate;
-  document.getElementById("returnDate").value = returnDate;
-  document.getElementById("editingLoanId").value = id;
-
-// Switch buttons visibility
-  document.getElementById("submitButton").classList.add("d-none");
-  document.getElementById("updateButtonPatch").classList.remove("d-none");
-}
-
-// Update loan fields using PATCH
-async function updateLoanPATCH() {
-  const id = document.getElementById("editingLoanId").value;
-  const book = document.getElementById("loanBook").value.trim();
-  const user = document.getElementById("loanUser").value.trim();
-  const loanDate = document.getElementById("loanDate").value.trim();
-  const returnDate = document.getElementById("returnDate").value.trim();
-
-  const body = {};
-  if (book) body.book = book;
-  if (user) body.user = user;
-  if (loanDate) body.loanDate = loanDate;
-  if (returnDate) body.returnDate = returnDate;
-
-  if (id) {
-    await fetch(`/api/loans/${id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body)
-    });
-
-    resetForm();
-    fetchLoans();
-  }
-}
-
-// Delete a loan by ID
-async function deleteLoan(id) {
-  await fetch(`/api/loans/${id}`, { method: "DELETE" });
+  resetForm();
   fetchLoans();
 }
 
-// Reset form and button states
-function resetForm() {
-  document.getElementById("addLoanForm").reset();
-  document.getElementById("editingLoanId").value = "";
-  document.getElementById("submitButton").classList.remove("d-none");
-  document.getElementById("updateButtonPatch").classList.add("d-none");
+function loadLoanForEdit(id, userId, bookId, loanDate, returnDate) {
+  document.getElementById("userId").value = userId;
+  document.getElementById("bookId").value = bookId;
+  document.getElementById("loanDate").value = loanDate;
+  document.getElementById("returnDate").value = returnDate || "";
+  document.getElementById("editLoanId").value = id;
+  document.getElementById("submitBtn").style.display = "none";
+  document.getElementById("updateBtn").style.display = "inline-block";
 }
 
-// Form and button event listeners
-document.getElementById("addLoanForm").addEventListener("submit", addLoan);
-document.getElementById("updateButtonPatch").addEventListener("click", updateLoanPATCH);
+async function updateLoan() {
+  const id = document.getElementById("editLoanId").value;
+  const user = { id: parseInt(document.getElementById("userId").value) };
+  const book = { id: parseInt(document.getElementById("bookId").value) };
+  const loanDate = document.getElementById("loanDate").value;
+  const returnDate = document.getElementById("returnDate").value;
+
+  const loan = { user, book, loanDate, returnDate };
+
+  await fetch("/api/loans/" + id, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(loan)
+  });
+
+  resetForm();
+  fetchLoans();
+}
+
+async function deleteLoan(id) {
+  await fetch("/api/loans/" + id, { method: "DELETE" });
+  fetchLoans();
+}
+
+function resetForm() {
+  document.getElementById("userId").value = "";
+  document.getElementById("bookId").value = "";
+  document.getElementById("loanDate").value = "";
+  document.getElementById("returnDate").value = "";
+  document.getElementById("editLoanId").value = "";
+  document.getElementById("submitBtn").style.display = "inline-block";
+  document.getElementById("updateBtn").style.display = "none";
+}
+
