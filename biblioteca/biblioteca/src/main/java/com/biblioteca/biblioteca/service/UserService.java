@@ -1,56 +1,49 @@
 package com.biblioteca.biblioteca.service;
 
 import com.biblioteca.biblioteca.model.User;
+import com.biblioteca.biblioteca.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
-    private final Map<String, User> userMap = new HashMap<>();
-    private static int nextId = 1;
 
-    // adds a new user and generates an ID
-    public void createUser(User user) {
-        String generatedId = String.valueOf(nextId++);
-        user.setId(generatedId);
-        userMap.put(generatedId, user);
+    @Autowired
+    private UserRepository userRepository;
+
+    public List<User> findAll() {
+        return userRepository.findAll();
     }
 
-// returns a user by ID
-    public User getUser(String id) {
-        return userMap.get(id);
-    }
-// replaces an user
-    public void replaceUser(String id, User newUser) {
-        newUser.setId(id);
-        userMap.put(id, newUser);
+    public Optional<User> findById(Long id) {
+        return userRepository.findById(id);
     }
 
-    // updates the fields provided
-    public void patchUser(String id, User partialUser) {
-        User existingUser = userMap.get(id);
-        if (existingUser != null) {
-            if (partialUser.getName() != null && !partialUser.getName().isEmpty()) {
-                existingUser.setName(partialUser.getName());
-            }
-            if (partialUser.getEmail() != null && !partialUser.getEmail().isEmpty()) {
-                existingUser.setEmail(partialUser.getEmail());
-            }
-        }
+    public User save(User user) {
+        return userRepository.save(user);
     }
 
-    // deletes an user by ID
-    public void deleteUser(String id) {
-        userMap.remove(id);
-    }    
-    // deletes all users
-    public void deleteAllUsers() {
-        userMap.clear();
+    public void delete(Long id) {
+        userRepository.deleteById(id);
     }
-    // returns all users
-    public Map<String, User> getAllUsers() {
-        return userMap;
+
+    public User update(Long id, User newUser) {
+        return userRepository.findById(id).map(user -> {
+            user.setName(newUser.getName());
+            user.setEmail(newUser.getEmail());
+            return userRepository.save(user);
+        }).orElseThrow();
+    }
+
+    public User patch(Long id, String name, String email) {
+        return userRepository.findById(id).map(user -> {
+            if (name != null) user.setName(name);
+            if (email != null) user.setEmail(email);
+            return userRepository.save(user);
+        }).orElseThrow();
     }
 }
+
