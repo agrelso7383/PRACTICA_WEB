@@ -1,60 +1,49 @@
 package com.biblioteca.biblioteca.service;
 
 import com.biblioteca.biblioteca.model.Book;
+import com.biblioteca.biblioteca.repository.BookRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookService {
 
-     // Adds a new book and generates a unique ID
-    private final Map<String, Book> bookMap = new HashMap<>();
-    private static int nextId = 1;
-    
-     // Adds a new book and generates a unique ID
-    public void createBook(Book book) {
-        String generatedId = String.valueOf(nextId++);
-        book.setId(generatedId);
-        bookMap.put(generatedId, book);
-    }
-// returns a book by the ID
-    public Book getBook(String id) {
-        return bookMap.get(id);
+    @Autowired
+    private BookRepository bookRepository;
+
+    public List<Book> findAll() {
+        return bookRepository.findAll();
     }
 
-// replaces a book with a new one with the same ID
-    public void replaceBook(String id, Book book) {
-        book.setId(id); // aseguramos que el ID coincida
-        bookMap.put(id, book); // reemplaza completamente el libro
+    public Optional<Book> findById(Long id) {
+        return bookRepository.findById(id);
     }
 
-// uodates fields of a book
-    public void patchBook(String id, Book updates) {
-        Book existingBook = bookMap.get(id);
-        if (existingBook != null) {
-            if (updates.getTitle() != null && !updates.getTitle().isEmpty()) {
-                existingBook.setTitle(updates.getTitle());
-            }
-            if (updates.getAuthor() != null && !updates.getAuthor().isEmpty()) {
-                existingBook.setAuthor(updates.getAuthor());
-            }
-            // ID no changed
-        }
+    public Book save(Book book) {
+        return bookRepository.save(book);
     }
 
-// deletes a book by ID
-    public void deleteBook(String id) {
-        bookMap.remove(id);
+    public void delete(Long id) {
+        bookRepository.deleteById(id);
     }
-// deletes all books
-    public void deleteAllBooks() {
-        bookMap.clear(); 
+
+    public Book update(Long id, Book newBook) {
+        return bookRepository.findById(id).map(book -> {
+            book.setTitle(newBook.getTitle());
+            book.setAuthor(newBook.getAuthor());
+            return bookRepository.save(book);
+        }).orElseThrow();
     }
-    
-// returns all books
-    public Map<String, Book> getAllBooks() {
-        return bookMap;
+
+    public Book patch(Long id, String title, String author) {
+        return bookRepository.findById(id).map(book -> {
+            if (title != null) book.setTitle(title);
+            if (author != null) book.setAuthor(author);
+            return bookRepository.save(book);
+        }).orElseThrow();
     }
 }
+
