@@ -1,0 +1,17 @@
+// Source code is decompiled from a .class file using FernFlower decompiler.
+package com.biblioteca.biblioteca.controller;
+
+import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class CustomErrorController implements ErrorController {
+   public CustomErrorController() {
+   }
+
+   @GetMapping({"/error"})
+   public String handleError() {
+      return "error";
+   }
+}
