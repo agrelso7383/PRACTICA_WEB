@@ -1,0 +1,88 @@
+// Source code is decompiled from a .class file using FernFlower decompiler.
+package com.biblioteca.biblioteca.service;
+
+import com.biblioteca.biblioteca.model.Book;
+import com.biblioteca.biblioteca.model.Loan;
+import com.biblioteca.biblioteca.model.User;
+import com.biblioteca.biblioteca.repository.BookRepository;
+import com.biblioteca.biblioteca.repository.LoanRepository;
+import com.biblioteca.biblioteca.repository.UserRepository;
+import java.util.List;
+import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class LoanService {
+   @Autowired
+   private LoanRepository loanRepository;
+   @Autowired
+   private UserRepository userRepository;
+   @Autowired
+   private BookRepository bookRepository;
+
+   public LoanService() {
+   }
+
+   public List<Loan> findAll() {
+      return this.loanRepository.findAll();
+   }
+
+   public Optional<Loan> findById(Long id) {
+      return this.loanRepository.findById(id);
+   }
+
+   public Loan save(Loan loan) {
+      if (loan.getUser() != null) {
+         loan.setUser((User)this.userRepository.findById(loan.getUser().getId()).orElseThrow());
+      }
+
+      if (loan.getBook() != null) {
+         loan.setBook((Book)this.bookRepository.findById(loan.getBook().getId()).orElseThrow());
+      }
+
+      return (Loan)this.loanRepository.save(loan);
+   }
+
+   public void delete(Long id) {
+      this.loanRepository.deleteById(id);
+   }
+
+   public Loan update(Long id, Loan newLoan) {
+      return (Loan)this.loanRepository.findById(id).map((loan) -> {
+         loan.setLoanDate(newLoan.getLoanDate());
+         loan.setReturnDate(newLoan.getReturnDate());
+         if (newLoan.getUser() != null) {
+            loan.setUser((User)this.userRepository.findById(newLoan.getUser().getId()).orElseThrow());
+         }
+
+         if (newLoan.getBook() != null) {
+            loan.setBook((Book)this.bookRepository.findById(newLoan.getBook().getId()).orElseThrow());
+         }
+
+         return (Loan)this.loanRepository.save(loan);
+      }).orElseThrow();
+   }
+
+   public Loan patch(Long id, Loan patchLoan) {
+      return (Loan)this.loanRepository.findById(id).map((loan) -> {
+         if (patchLoan.getLoanDate() != null) {
+            loan.setLoanDate(patchLoan.getLoanDate());
+         }
+
+         if (patchLoan.getReturnDate() != null) {
+            loan.setReturnDate(patchLoan.getReturnDate());
+         }
+
+         if (patchLoan.getUser() != null) {
+            loan.setUser((User)this.userRepository.findById(patchLoan.getUser().getId()).orElseThrow());
+         }
+
+         if (patchLoan.getBook() != null) {
+            loan.setBook((Book)this.bookRepository.findById(patchLoan.getBook().getId()).orElseThrow());
+         }
+
+         return (Loan)this.loanRepository.save(loan);
+      }).orElseThrow();
+   }
+}
