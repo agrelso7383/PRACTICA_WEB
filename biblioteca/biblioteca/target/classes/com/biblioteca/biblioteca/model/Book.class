@@ -1,0 +1,66 @@
+// Source code is decompiled from a .class file using FernFlower decompiler.
+package com.biblioteca.biblioteca.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import java.util.List;
+
+@Entity
+public class Book {
+   @Id
+   @GeneratedValue(
+      strategy = GenerationType.IDENTITY
+   )
+   private Long id;
+   private String title;
+   private String author;
+   @OneToMany(
+      mappedBy = "book"
+   )
+   @JsonIgnore
+   private List<Loan> loans;
+
+   public Book() {
+   }
+
+   public Book(String title, String author) {
+      this.title = title;
+      this.author = author;
+   }
+
+   public Long getId() {
+      return this.id;
+   }
+
+   public void setId(Long id) {
+      this.id = id;
+   }
+
+   public String getTitle() {
+      return this.title;
+   }
+
+   public void setTitle(String title) {
+      this.title = title;
+   }
+
+   public String getAuthor() {
+      return this.author;
+   }
+
+   public void setAuthor(String author) {
+      this.author = author;
+   }
+
+   public List<Loan> getLoans() {
+      return this.loans;
+   }
+
+   public void setLoans(List<Loan> loans) {
+      this.loans = loans;
+   }
+}
