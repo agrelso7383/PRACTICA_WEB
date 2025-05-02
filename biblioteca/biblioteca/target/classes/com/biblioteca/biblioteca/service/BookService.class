@@ -1,0 +1,56 @@
+// Source code is decompiled from a .class file using FernFlower decompiler.
+package com.biblioteca.biblioteca.service;
+
+import com.biblioteca.biblioteca.model.Book;
+import com.biblioteca.biblioteca.repository.BookRepository;
+import java.util.List;
+import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class BookService {
+   @Autowired
+   private BookRepository bookRepository;
+
+   public BookService() {
+   }
+
+   public List<Book> findAll() {
+      return this.bookRepository.findAll();
+   }
+
+   public Optional<Book> findById(Long id) {
+      return this.bookRepository.findById(id);
+   }
+
+   public Book save(Book book) {
+      return (Book)this.bookRepository.save(book);
+   }
+
+   public void delete(Long id) {
+      this.bookRepository.deleteById(id);
+   }
+
+   public Book update(Long id, Book newBook) {
+      return (Book)this.bookRepository.findById(id).map((book) -> {
+         book.setTitle(newBook.getTitle());
+         book.setAuthor(newBook.getAuthor());
+         return (Book)this.bookRepository.save(book);
+      }).orElseThrow();
+   }
+
+   public Book patch(Long id, String title, String author) {
+      return (Book)this.bookRepository.findById(id).map((book) -> {
+         if (title != null) {
+            book.setTitle(title);
+         }
+
+         if (author != null) {
+            book.setAuthor(author);
+         }
+
+         return (Book)this.bookRepository.save(book);
+      }).orElseThrow();
+   }
+}
