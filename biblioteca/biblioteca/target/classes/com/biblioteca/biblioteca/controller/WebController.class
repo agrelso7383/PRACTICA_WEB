@@ -1,0 +1,46 @@
+// Source code is decompiled from a .class file using FernFlower decompiler.
+package com.biblioteca.biblioteca.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class WebController {
+   public WebController() {
+   }
+
+   @GetMapping({"/"})
+   public String home() {
+      return "home";
+   }
+
+   @GetMapping({"/bookList"})
+   public String books() {
+      return "ListBooks";
+   }
+
+   @GetMapping({"/manageBooks"})
+   public String manageBooks() {
+      return "manageBooks";
+   }
+
+   @GetMapping({"/manageLoans"})
+   public String manageLoans() {
+      return "manageLoans";
+   }
+
+   @GetMapping({"/manageUsers"})
+   public String manageUsers() {
+      return "manageUsers";
+   }
+
+   @GetMapping({"/info"})
+   public String info() {
+      return "info";
+   }
+
+   @GetMapping({"/aboutUs"})
+   public String aboutUs() {
+      return "aboutUs";
+   }
+}
