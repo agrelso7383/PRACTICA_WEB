@@ -10,11 +10,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
-
   <link rel="stylesheet" href="css/manageLoans.css" />
 </head>
-<body>
 
+<body>
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
     <div class="container-fluid">
       <a class="navbar-brand" href="/">Virtual Library</a>
@@ -22,46 +21,49 @@
   </nav>
 
   <div class="container mt-5 pt-4">
-    <h1>Manage Loans</h1>
+    <h1 class="mb-4 text-center">Manage Loans</h1>
 
     <div class="card mb-4">
       <div class="card-header">
         <h3 class="m-0">Add or Update Loan</h3>
       </div>
       <div class="card-body">
-        <form id="addLoanForm">
+        <form id="addLoanForm" onsubmit="addLoan(event)">
           <div class="mb-3">
-            <label for="loanBook" class="form-label">Book Title</label>
-            <input type="text" class="form-control" id="loanBook" required />
+            <label for="userId" class="form-label">User ID</label>
+            <input type="number" class="form-control" id="userId" placeholder="Enter user ID" required />
           </div>
+
           <div class="mb-3">
-            <label for="loanUser" class="form-label">User Name</label>
-            <input type="text" class="form-control" id="loanUser" required />
+            <label for="bookId" class="form-label">Book ID</label>
+            <input type="number" class="form-control" id="bookId" placeholder="Enter book ID" required />
           </div>
+
           <div class="mb-3">
             <label for="loanDate" class="form-label">Loan Date</label>
-            <input type="text" class="form-control" id="loanDate" required />
+            <input type="text" class="form-control" id="loanDate" placeholder="Enter loan date" required />
           </div>
+
           <div class="mb-3">
             <label for="returnDate" class="form-label">Return Date</label>
-            <input type="text" class="form-control" id="returnDate" required />
+            <input type="text" class="form-control" id="returnDate" placeholder="Enter return date" />
           </div>
 
-          <input type="hidden" id="editingLoanId" />
+          <input type="hidden" id="editLoanId" />
 
-          <button type="submit" class="btn btn-primary w-100" id="submitButton">Add Loan</button>
-          <button type="button" class="btn btn-info w-100 mt-2 d-none" id="updateButtonPatch">Update (PATCH)</button>
+          <button type="submit" class="btn btn-primary w-100" id="submitBtn">Add Loan</button>
+          <button type="button" class="btn btn-info w-100 mt-2" id="updateBtn" style="display:none;" onclick="updateLoan()">Update</button>
         </form>
       </div>
     </div>
 
     <div class="loan-list">
-      <h3>Loan Records</h3>
+      <h3>Loan Collection</h3>
       <div id="loansContainer"></div>
     </div>
   </div>
 
-  <footer>
+  <footer class="text-center">
     <p>&copy; 2025 Virtual Library - All rights reserved.</p>
   </footer>
 
