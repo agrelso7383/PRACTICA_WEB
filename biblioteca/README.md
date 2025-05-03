@@ -1,5 +1,5 @@
 # PRACTICA_WEB
-# Link to the repository: [https://github.com/agrelso7383/PRACTICA2/tree/main](https://github.com/agrelso7383/PRACTICA2/blob/main/grupo5_practicaWeb/grupo5_practicaWeb/README.md)
+# Link to the repository: [https://github.com/agrelso7383/PRACTICA_WEB/tree/main](https://github.com/agrelso7383/PRACTICA_WEB/blob/main/grupo5_practicaWeb/grupo5_practicaWeb/README.md)
 
 This project is a simple web application for managing a collection of books. It provides a RESTful API that supports basic CRUD operations. You access to the API by **http://localhost:8080/api/books** and to the H2 Console by **http://localhost:8080/h2-console**
 
